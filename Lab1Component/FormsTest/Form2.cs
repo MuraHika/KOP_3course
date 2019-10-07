@@ -18,5 +18,10 @@ namespace FormsTest
             InitializeComponent();
             chastotaDiapComponent.LoadEnumerationName(Test.list);
         }
+
+        private void buttonSavePDF_Click(object sender, EventArgs e)
+        {
+            requestPDFComponent.SavePDF();
+        }
     }
 }

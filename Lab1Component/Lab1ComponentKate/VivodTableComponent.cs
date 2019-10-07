@@ -26,6 +26,8 @@ namespace Lab1ComponentKate
         {
             List<string> listName = list1;
             List<string> listNumber = list2;
+            for (int i = 0; i < 2; i++)
+                dataGridView.Columns[i].HeaderText = Convert.ToString(i + 1);
             for (int i = 0; i < listName.Count; ++i)
             {
                 //Добавляем строку, указывая значения колонок поочереди слева направо
@@ -49,6 +51,7 @@ namespace Lab1ComponentKate
                 //Добавляем строку, указывая значения колонок поочереди слева направо
                 dataGridView.Rows.Add("Пример 1, Товар " + i, list[i], i);
             }
+            
         }
     }
 }

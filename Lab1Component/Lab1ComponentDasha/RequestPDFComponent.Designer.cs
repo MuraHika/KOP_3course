@@ -1,6 +1,6 @@
-﻿namespace Lab1Component
+﻿namespace Lab1ComponentDasha
 {
-    partial class SaveBackupComponent
+    partial class RequestPDFComponent
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -28,21 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.buttonSaveBackup = new System.Windows.Forms.Button();
+            this.buttonSavePDF = new System.Windows.Forms.Button();
             // 
-            // buttonSaveBackup
+            // buttonSavePDF
             // 
-            this.buttonSaveBackup.Location = new System.Drawing.Point(0, 0);
-            this.buttonSaveBackup.Name = "buttonSaveBackup";
-            this.buttonSaveBackup.Size = new System.Drawing.Size(75, 23);
-            this.buttonSaveBackup.TabIndex = 0;
-            this.buttonSaveBackup.Text = "Сохранить данные в формате json";
-            this.buttonSaveBackup.UseVisualStyleBackColor = true;
+            this.buttonSavePDF.Location = new System.Drawing.Point(0, 0);
+            this.buttonSavePDF.Name = "buttonSavePDF";
+            this.buttonSavePDF.Size = new System.Drawing.Size(75, 23);
+            this.buttonSavePDF.TabIndex = 0;
+            this.buttonSavePDF.Text = "button1";
+            this.buttonSavePDF.UseVisualStyleBackColor = true;
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button buttonSaveBackup;
+        private System.Windows.Forms.Button buttonSavePDF;
     }
 }

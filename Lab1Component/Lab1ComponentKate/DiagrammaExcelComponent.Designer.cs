@@ -1,6 +1,6 @@
-﻿namespace Lab1Component
+﻿namespace Lab1ComponentKate
 {
-    partial class SaveBackupComponent
+    partial class DiagrammaExcelComponent
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -28,21 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.buttonSaveBackup = new System.Windows.Forms.Button();
+            this.buttonCreateDiagramma = new System.Windows.Forms.Button();
             // 
-            // buttonSaveBackup
+            // buttonCreateDiagramma
             // 
-            this.buttonSaveBackup.Location = new System.Drawing.Point(0, 0);
-            this.buttonSaveBackup.Name = "buttonSaveBackup";
-            this.buttonSaveBackup.Size = new System.Drawing.Size(75, 23);
-            this.buttonSaveBackup.TabIndex = 0;
-            this.buttonSaveBackup.Text = "Сохранить данные в формате json";
-            this.buttonSaveBackup.UseVisualStyleBackColor = true;
+            this.buttonCreateDiagramma.Location = new System.Drawing.Point(0, 0);
+            this.buttonCreateDiagramma.Name = "buttonCreateDiagramma";
+            this.buttonCreateDiagramma.Size = new System.Drawing.Size(75, 23);
+            this.buttonCreateDiagramma.TabIndex = 0;
+            this.buttonCreateDiagramma.Text = "button1";
+            this.buttonCreateDiagramma.UseVisualStyleBackColor = true;
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button buttonSaveBackup;
+        private System.Windows.Forms.Button buttonCreateDiagramma;
     }
 }

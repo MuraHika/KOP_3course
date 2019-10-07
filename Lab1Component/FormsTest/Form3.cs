@@ -16,7 +16,12 @@ namespace FormsTest
         public Form3()
         {
             InitializeComponent();
-            vivodTableComponent.LoadEnumerationName(Test.list, Test2.list);
+            vivodTableComponent.LoadEnumerationName(Test.listName, Test.listNumber);
+        }
+
+        private void buttonCreateD_Click(object sender, EventArgs e)
+        {
+            diagrammaExcelComponent.CreateDiagram();
         }
     }
 }

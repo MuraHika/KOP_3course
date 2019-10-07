@@ -28,23 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.numericUpDown = new System.Windows.Forms.NumericUpDown();
             this.textBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonGo = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown)).BeginInit();
+            this.textBoxYear = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
-            // numericUpDown
-            // 
-            this.numericUpDown.Location = new System.Drawing.Point(25, 39);
-            this.numericUpDown.Name = "numericUpDown";
-            this.numericUpDown.Size = new System.Drawing.Size(229, 20);
-            this.numericUpDown.TabIndex = 0;
             // 
             // textBox
             // 
-            this.textBox.Location = new System.Drawing.Point(150, 117);
+            this.textBox.Location = new System.Drawing.Point(165, 163);
             this.textBox.Name = "textBox";
             this.textBox.Size = new System.Drawing.Size(105, 20);
             this.textBox.TabIndex = 1;
@@ -52,7 +45,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 120);
+            this.label1.Location = new System.Drawing.Point(28, 166);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(131, 13);
             this.label1.TabIndex = 2;
@@ -60,7 +53,7 @@
             // 
             // buttonGo
             // 
-            this.buttonGo.Location = new System.Drawing.Point(77, 76);
+            this.buttonGo.Location = new System.Drawing.Point(92, 122);
             this.buttonGo.Name = "buttonGo";
             this.buttonGo.Size = new System.Drawing.Size(127, 27);
             this.buttonGo.TabIndex = 3;
@@ -68,27 +61,43 @@
             this.buttonGo.UseVisualStyleBackColor = true;
             this.buttonGo.Click += new System.EventHandler(this.buttonGo_Click);
             // 
+            // textBoxYear
+            // 
+            this.textBoxYear.Location = new System.Drawing.Point(62, 76);
+            this.textBoxYear.Name = "textBoxYear";
+            this.textBoxYear.Size = new System.Drawing.Size(184, 20);
+            this.textBoxYear.TabIndex = 4;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(51, 40);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(195, 13);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Введите дату в формате dd/mm/yyyy:";
+            // 
             // ChastotaDiapComponent
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.textBoxYear);
             this.Controls.Add(this.buttonGo);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox);
-            this.Controls.Add(this.numericUpDown);
             this.Name = "ChastotaDiapComponent";
-            this.Size = new System.Drawing.Size(295, 180);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown)).EndInit();
+            this.Size = new System.Drawing.Size(318, 219);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.NumericUpDown numericUpDown;
         private System.Windows.Forms.TextBox textBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonGo;
+        private System.Windows.Forms.TextBox textBoxYear;
+        private System.Windows.Forms.Label label2;
     }
 }

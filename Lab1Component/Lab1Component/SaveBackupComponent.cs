@@ -27,12 +27,7 @@ namespace Lab1Component
 
             InitializeComponent();
         }
-
-        private void buttonSaveBackup_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        
         public void SaveJSON()
         {
 

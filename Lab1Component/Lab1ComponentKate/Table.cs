@@ -8,8 +8,14 @@ namespace Lab1ComponentKate
 {
     public class Table
     {
+        public int Width { get; set; }
+
         public Table(List<string> list) {
 
+        }
+
+        public void ChangeColumn(int width) {
+            Width = width;
         }
     }
 }
