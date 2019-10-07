@@ -30,36 +30,44 @@ namespace Lab1Component
 
         private void buttonSaveBackup_Click(object sender, EventArgs e)
         {
-           
+
         }
 
-        public void SaveJSON() {
+        public void SaveJSON()
+        {
 
             Test org1 = new Test(Test.NameOrg.Авиастар.ToString(), Test.TypeOrg.ОАО.ToString());
             Test org2 = new Test(Test.NameOrg.УАЗ.ToString(), Test.TypeOrg.ООО.ToString());
             Test[] org = new Test[] { org1, org2 };
 
             DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(Test[]));
-
-            SaveFileDialog pathJSON = new SaveFileDialog();
-            pathJSON.Filter = "JSON files (*.json)|*.json";
-            if (pathJSON.ShowDialog() == DialogResult.OK)
+            SaveFileDialog path = new SaveFileDialog();
+            if (path.ShowDialog() == DialogResult.OK)
             {
-                using (FileStream fs = new FileStream(pathJSON.FileName, FileMode.OpenOrCreate))
+                DirectoryInfo directoryinfo = Directory.CreateDirectory(path.FileName);
+                SaveFileDialog pathJSON = new SaveFileDialog();
+                pathJSON.Filter = "JSON files (*.json)|*.json";
+                if (pathJSON.ShowDialog() == DialogResult.OK)
+
                 {
-                    jsonFormatter.WriteObject(fs, org);
+                    using (FileStream fs = new FileStream(pathJSON.FileName, FileMode.OpenOrCreate))
+                    {
+                        jsonFormatter.WriteObject(fs, org);
+                    }
                 }
-            }
-        
 
-            SaveFileDialog sfd = new SaveFileDialog();
-            sfd.Filter = "Zip files (*.zip)|*.zip";
-            if (sfd.ShowDialog() == DialogResult.OK)
-            {
-                ZipFile zf = new ZipFile(sfd.FileName);
-                zf.AddDirectory(bd.SelectedPath);
-                zf.Save();
-                MessageBox.Show("Архивация прошла успешно.", "Выполнено");
+
+
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.Filter = "Zip files (*.zip)|*.zip";
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    ZipFile zf = new ZipFile(sfd.FileName);
+                    zf.AddDirectory(directoryinfo.FullName);
+                    zf.Save();
+                    directoryinfo.Delete(true);
+                    MessageBox.Show("Архивация прошла успешно.", "Выполнено");
+                }
             }
         }
 

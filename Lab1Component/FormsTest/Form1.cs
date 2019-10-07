@@ -26,7 +26,6 @@ namespace FormsTest
 
         private void buttonChange_Click(object sender, EventArgs e)
         {
-            //nameOrgListComponent.SelectedIndexName = 0;
             saveBackupComponent.SaveJSON();
         }
     }
