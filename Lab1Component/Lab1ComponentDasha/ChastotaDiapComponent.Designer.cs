@@ -63,7 +63,7 @@
             // 
             // textBoxYear
             // 
-            this.textBoxYear.Location = new System.Drawing.Point(62, 76);
+            this.textBoxYear.Location = new System.Drawing.Point(62, 96);
             this.textBoxYear.Name = "textBoxYear";
             this.textBoxYear.Size = new System.Drawing.Size(184, 20);
             this.textBoxYear.TabIndex = 4;
@@ -71,7 +71,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(51, 40);
+            this.label2.Location = new System.Drawing.Point(51, 71);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(195, 13);
             this.label2.TabIndex = 5;

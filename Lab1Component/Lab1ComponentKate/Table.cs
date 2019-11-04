@@ -10,11 +10,7 @@ namespace Lab1ComponentKate
     {
         public int Width { get; set; }
 
-        public Table(List<string> list) {
-
-        }
-
-        public void ChangeColumn(int width) {
+        public Table(int width) {
             Width = width;
         }
     }

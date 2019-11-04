@@ -17,22 +17,18 @@ namespace Lab1ComponentDasha
         public int year = 0;
         public int month = 0;
         public int day = 0;
-        public int year_post = 0;
-        public int month_post = 0;
-        public int day_post = 0;
         public string date { get; set; }
+        public DateTime DateFrom { get; set; }
+        public DateTime DateTo { get; set; }
         public ChastotaDiapComponent()
         {
             InitializeComponent();
         }
 
-        /// <summary>
-        /// Заполнение списка значениями из справочника
-        /// </summary>
-        /// <param name="type">тип-справочник</param>
-        public void LoadEnumerationName(List<string> list)
+        public void LoadEnumerationName(string dateFrom, string dateTo)
         {
-            dates = list;
+            DateFrom = DateTime.Parse(dateFrom);
+            DateTo = DateTime.Parse(dateTo);
         }
 
         private void buttonGo_Click(object sender, EventArgs e)
@@ -41,61 +37,75 @@ namespace Lab1ComponentDasha
             {
                 if (CorrectDate(textBoxYear.Text.ToString()) == true)
                 {
-                    //string date = textBoxYear.Text.ToString();
                     date = textBoxYear.Text.ToString();
-                    year = Convert.ToInt32(date.Split('/')[2]);
-                    month = Convert.ToInt32(date.Split('/')[1]);
-                    day = Convert.ToInt32(date.Split('/')[0]);
-                    int count = 0;
-                    for (int i = 0; i < dates.Count; i++)
+                    if (CheckDate(date) == true)
                     {
-                        year_post = Convert.ToInt32(dates[i].Split('/')[2]);
-                        month_post = Convert.ToInt32(dates[i].Split('/')[1]);
-                        day_post = Convert.ToInt32(dates[i].Split('/')[0]);
-                        if (year_post == year)
-                        {
-                            if (month_post == month)
-                            {
-                                if (day_post <= day)
-                                {
-                                    count++;
-                                }
-                            }
-                            else if (month_post < month)
-                            {
-                                count++;
-                            }
-                        }
-                        else if (year_post == year - 1)
-                        {
-                            if (month_post == month)
-                            {
-                                if (day_post >= day)
-                                {
-                                    count++;
-                                }
-                            }
-                            else if (month_post > month)
-                            {
-                                count++;
-                            }
-                        }
+                        MessageBox.Show("Дата входит в диапазон", "Отлично", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-                    textBox.Text = count.ToString();
+                    else
+                    {
+                        MessageBox.Show("Дата не входит в диапазон", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Неверный формат введеной даты", "Ошибка", MessageBoxButtons.OK,
-                       MessageBoxIcon.Error);
+                    date = DateFrom.ToString();
+                    MessageBox.Show("Неверный формат введеной даты", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
             {
-                MessageBox.Show("Не введена дата. Пожалуйста, заполните поле даты", "Ошибка", MessageBoxButtons.OK,
-                   MessageBoxIcon.Error);
+                date = DateFrom.ToString();
+                MessageBox.Show("Не введена дата. Пожалуйста, заполните поле даты", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        
+
+        public bool CheckDate(string date)
+        {
+            year = Convert.ToInt32(date.Split('/')[2]);
+            month = Convert.ToInt32(date.Split('/')[1]);
+            day = Convert.ToInt32(date.Split('/')[0]);
+            if (DateFrom.Year <= DateTo.Year && DateFrom.Month <= DateTo.Month && DateFrom.Day < DateTo.Day)
+            {
+                if (year < DateTo.Year && year > DateFrom.Year)
+                {
+                    return true;
+                }
+                else if (year == DateFrom.Year)
+                {
+                    if (month > DateFrom.Month)
+                    {
+                        return true;
+                    }
+                    else if (month == DateFrom.Month)
+                    {
+                        if (day >= DateFrom.Day)
+                        {
+                            return true;
+                        }
+                    }
+                }
+                else if (year == DateTo.Year)
+                {
+                    if (month < DateTo.Month)
+                    {
+                        return true;
+                    }
+                    else if (month == DateTo.Month)
+                    {
+                        if (day <= DateTo.Day)
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Дата начала больше даты конца", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return false;
+        }
 
         public bool CorrectDate(string date)
         {

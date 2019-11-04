@@ -6,7 +6,9 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.util;
 using System.Windows.Forms;
@@ -27,81 +29,71 @@ namespace Lab1ComponentDasha
             InitializeComponent();
         }
 
-        public void SavePDF()
+        public void SavePDF(string path, List<Test> tests, List<string> fields, List<string> title, string head)
         {
-            SaveFileDialog sfd = new SaveFileDialog
+            try
             {
-                Filter = "pdf|*.pdf"
-            };
-            if (sfd.ShowDialog() == DialogResult.OK)
-            {
-                try
+                //из ресрусов получаем шрифт для кирилицы
+                if (!File.Exists("TIMCYR.TTF"))
                 {
-                    Test test = new Test("Поставщики и типы их поставляемых изделий", "ФИО поставщиков", "Типы изделий");
-                    //из ресрусов получаем шрифт для кирилицы
-                    if (!File.Exists("TIMCYR.TTF"))
-                    {
-                        File.WriteAllBytes("TIMCYR.TTF", Properties.Resources.TIMCYR);
-                    }
-                    //открываем файл для работы
-                    FileStream fs = new FileStream(sfd.FileName, FileMode.OpenOrCreate,
-                   FileAccess.Write);
-                    //создаем документ, задаем границы, связываем документ и поток
-                    iTextSharp.text.Document doc = new iTextSharp.text.Document();
-                    doc.SetMargins(0.5f, 0.5f, 0.5f, 0.5f);
-                    PdfWriter writer = PdfWriter.GetInstance(doc, fs);
-                    doc.Open();
-                    BaseFont baseFont = BaseFont.CreateFont("TIMCYR.TTF", BaseFont.IDENTITY_H,
-                   BaseFont.NOT_EMBEDDED);
-                    //вставляем заголовок
-                    var phraseTitle = new Phrase(test.Title,
-                    new iTextSharp.text.Font(baseFont, 16, iTextSharp.text.Font.BOLD));
-                    iTextSharp.text.Paragraph paragraph = new iTextSharp.text.Paragraph(phraseTitle)
-                    {
-                        Alignment = Element.ALIGN_CENTER,
-                        SpacingAfter = 12
-                    };
-                    doc.Add(paragraph);
+                    File.WriteAllBytes("TIMCYR.TTF", Properties.Resources.TIMCYR);
+                }
+                //открываем файл для работы
+                FileStream fs = new FileStream(path, FileMode.OpenOrCreate,
+               FileAccess.Write);
+                //создаем документ, задаем границы, связываем документ и поток
+                iTextSharp.text.Document doc = new iTextSharp.text.Document();
+                doc.SetMargins(0.5f, 0.5f, 0.5f, 0.5f);
+                PdfWriter writer = PdfWriter.GetInstance(doc, fs);
+                doc.Open();
+                BaseFont baseFont = BaseFont.CreateFont("TIMCYR.TTF", BaseFont.IDENTITY_H,
+               BaseFont.NOT_EMBEDDED);
+                //вставляем заголовок
+                var phraseTitle = new Phrase(title[0],
+                new iTextSharp.text.Font(baseFont, 16, iTextSharp.text.Font.BOLD));
+                iTextSharp.text.Paragraph paragraph = new iTextSharp.text.Paragraph(phraseTitle)
+                {
+                    Alignment = Element.ALIGN_CENTER,
+                    SpacingAfter = 12
+                };
+                doc.Add(paragraph);
+                var fontForCellBold = new iTextSharp.text.Font(baseFont, 10,
+               iTextSharp.text.Font.BOLD);
 
-                    /*var phrasePeriod = new Phrase("c " + model.DateFrom.Value.ToShortDateString() + " по " + model.DateTo.Value.ToShortDateString(), new iTextSharp.text.Font(baseFont, 14, iTextSharp.text.Font.BOLD));
-                    paragraph = new iTextSharp.text.Paragraph(phrasePeriod)
-                    {
-                        Alignment = Element.ALIGN_CENTER,
-                        SpacingAfter = 12
-                    };
-                    doc.Add(paragraph);
-                    */
-
+                if (head.Contains("Строка"))
+                {
                     //вставляем таблицу, задаем количество столбцов, и ширину колонок
-                    PdfPTable table = new PdfPTable(2)
+                    PdfPTable table = new PdfPTable(fields.Count)
                     {
                         TotalWidth = 800F
                     };
-                    table.SetTotalWidth(new float[] { 160, 140});
+                    table.SetTotalWidth(new float[] { 160, 140 });
                     //вставляем шапку
                     PdfPCell cell = new PdfPCell();
-                    var fontForCellBold = new iTextSharp.text.Font(baseFont, 10,
-                   iTextSharp.text.Font.BOLD);
-                    table.AddCell(new PdfPCell(new Phrase(test.NamePost, fontForCellBold))
+
+                    for (int i = 1; i < title.Count; i++)
                     {
-                        HorizontalAlignment = Element.ALIGN_CENTER
-                    });
-                    table.AddCell(new PdfPCell(new Phrase(test.NameType, fontForCellBold))
-                    {
-                        HorizontalAlignment = Element.ALIGN_CENTER
-                    });
+                        table.AddCell(new PdfPCell(new Phrase(title[i], fontForCellBold))
+                        {
+                            HorizontalAlignment = Element.ALIGN_CENTER
+                        });
+                    }
 
                     //заполняем таблицу
-                    var listPost = test.GetPost();
-                    var listType = test.GetType();
-                    Random rnd = new Random();
                     var fontForCells = new iTextSharp.text.Font(baseFont, 10);
-                    for (int i = 0; i < listPost.Count; i++)
+                    foreach (var item in tests)
                     {
-                        cell = new PdfPCell(new Phrase(listPost[i], fontForCells));
-                        table.AddCell(cell);
-                        cell = new PdfPCell(new Phrase(listType[rnd.Next(3)], fontForCells));
-                        table.AddCell(cell);
+                        Type t = item.GetType();
+                        string[] field = new string[t.GetFields().Length];
+                        foreach (var _field in t.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance))
+                        {
+                            if (fields.Contains(new Regex(@"<(.*?)>").Match(_field.Name).Groups[1].Value))
+                            {
+                                var str = _field.GetValue(item);
+                                cell = new PdfPCell(new Phrase(str.ToString(), fontForCells));
+                                table.AddCell(cell);
+                            }
+                        }
                     }
                     cell = new PdfPCell(new Phrase("", fontForCellBold))
                     {
@@ -110,13 +102,60 @@ namespace Lab1ComponentDasha
                     table.AddCell(cell);
                     //вставляем таблицу
                     doc.Add(table);
-                    doc.Close();
                 }
-                catch (Exception ex)
+                else if (head.Contains("Столбец"))
                 {
-                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
-                   MessageBoxIcon.Error);
+                    //вставляем таблицу, задаем количество столбцов, и ширину колонок
+                    PdfPTable table = new PdfPTable(tests.Count + 1)
+                    {
+                        TotalWidth = 800F
+                    };
+                    float[] width = new float[tests.Count + 1];
+                    for (int s = 0; s < width.Length; s++)
+                    {
+                        width[s] = 50;
+                    }
+                    table.SetTotalWidth(width);
+                    //вставляем шапку
+                    PdfPCell cell = new PdfPCell();
+
+                    int j = 1;
+                    while (j < title.Count)
+                    {
+                        table.AddCell(new PdfPCell(new Phrase(title[j], fontForCellBold))
+                        {
+                            HorizontalAlignment = Element.ALIGN_CENTER
+                        });
+                        int i = 0;
+                        while (i < tests.Count)
+                        {
+                            //заполняем таблицу
+                            var fontForCells = new iTextSharp.text.Font(baseFont, 10);
+                            Type t = tests[i].GetType();
+                            string[] field = new string[t.GetFields().Length];
+                            var _field = t.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)[j];
+                            if (fields.Contains(new Regex(@"<(.*?)>").Match(_field.Name).Groups[1].Value))
+                            {
+                                var str = _field.GetValue(tests[i]);
+                                cell = new PdfPCell(new Phrase(str.ToString(), fontForCells));
+                                table.AddCell(cell);
+                            }
+                            i++;
+                        }
+
+                        j++;
+                    }
+                    //вставляем таблицу
+                    doc.Add(table);
                 }
+                doc.Close();
+                MessageBox.Show("Сохранение PDF прошло успешно!", "Отлично", MessageBoxButtons.OK,
+                   MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
+               MessageBoxIcon.Error);
             }
         }
     }

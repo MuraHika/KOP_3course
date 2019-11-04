@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace Lab1ComponentKate
 {
@@ -18,40 +20,42 @@ namespace Lab1ComponentKate
 
         }
 
-        /// <summary>
-        /// Заполнение списка значениями из справочника
-        /// </summary>
-        /// <param name="type">тип-справочник</param>
-        public void LoadEnumerationName(List<string> list1, List<string> list2)
+        public void LoadEnumerationName(List<Test> listPost, List<string> titles, List<string> fields)
         {
-            List<string> listName = list1;
-            List<string> listNumber = list2;
-            for (int i = 0; i < 2; i++)
-                dataGridView.Columns[i].HeaderText = Convert.ToString(i + 1);
-            for (int i = 0; i < listName.Count; ++i)
+            for (int i = 0; i < titles.Count; i++)
+                dataGridView.Columns.Add("Column" + i, titles[i]);
+
+            ChangeColumn();
+            foreach (var item in listPost)
             {
-                //Добавляем строку, указывая значения колонок поочереди слева направо
-                dataGridView.Rows.Add(listName[i], listNumber[i], i);
+                Type t = item.GetType();
+                string[] field = new string[titles.Count];
+                int i = 0;
+                foreach (var _field in t.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance))
+                {
+                    if (fields.Contains(new Regex(@"<(.*?)>").Match(_field.Name).Groups[1].Value))
+                    {
+                        var str = _field.GetValue(item);
+                        if (str != null)
+                        {
+                            field[i++] = str.ToString();
+                        }
+                    }
+                }
+                AddRow(field);
             }
         }
 
-        /// <summary>
-        /// Заполнение списка значениями из справочника
-        /// </summary>
-        /// <param name="type">тип-справочник</param>
-        public void LoadEnumerationNumber(Type type)
+        public void AddRow(string[] field)
         {
-            List<string> list = new List<string>();
-            foreach (var elem in Enum.GetValues(type))
-            {
-                list.Add(elem.ToString());
-            }
-            for (int i = 0; i < 5; ++i)
-            {
-                //Добавляем строку, указывая значения колонок поочереди слева направо
-                dataGridView.Rows.Add("Пример 1, Товар " + i, list[i], i);
-            }
-            
+            dataGridView.Rows.Add(field);
+        }
+
+        public void ChangeColumn()
+        {
+            Table table = new Table(120);
+            for (int i = 0; i < dataGridView.Columns.Count; i++)
+                dataGridView.Columns[i].Width = table.Width;
         }
     }
 }

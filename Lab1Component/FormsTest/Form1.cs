@@ -26,7 +26,7 @@ namespace FormsTest
 
         private void buttonChange_Click(object sender, EventArgs e)
         {
-            saveBackupComponent.SaveJSON();
+            saveBackupComponent.SaveJSON("O://");
         }
     }
 }

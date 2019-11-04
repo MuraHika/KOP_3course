@@ -27,8 +27,8 @@ namespace Lab1Component
 
             InitializeComponent();
         }
-        
-        public void SaveJSON()
+
+        public void SaveJSON(string path)
         {
 
             Test org1 = new Test(Test.NameOrg.Авиастар.ToString(), Test.TypeOrg.ОАО.ToString());
@@ -36,35 +36,21 @@ namespace Lab1Component
             Test[] org = new Test[] { org1, org2 };
 
             DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(Test[]));
-            SaveFileDialog path = new SaveFileDialog();
-            if (path.ShowDialog() == DialogResult.OK)
+            string pathDir = path + "directory";
+            DirectoryInfo directoryinfo = Directory.CreateDirectory(pathDir);
+
+            string pathJSON = pathDir + "//backup.json";
+            using (FileStream fs = new FileStream(pathJSON, FileMode.OpenOrCreate))
             {
-                DirectoryInfo directoryinfo = Directory.CreateDirectory(path.FileName);
-                SaveFileDialog pathJSON = new SaveFileDialog();
-                pathJSON.Filter = "JSON files (*.json)|*.json";
-                if (pathJSON.ShowDialog() == DialogResult.OK)
-
-                {
-                    using (FileStream fs = new FileStream(pathJSON.FileName, FileMode.OpenOrCreate))
-                    {
-                        jsonFormatter.WriteObject(fs, org);
-                    }
-                }
-
-
-
-                SaveFileDialog sfd = new SaveFileDialog();
-                sfd.Filter = "Zip files (*.zip)|*.zip";
-                if (sfd.ShowDialog() == DialogResult.OK)
-                {
-                    ZipFile zf = new ZipFile(sfd.FileName);
-                    zf.AddDirectory(directoryinfo.FullName);
-                    zf.Save();
-                    directoryinfo.Delete(true);
-                    MessageBox.Show("Архивация прошла успешно.", "Выполнено");
-                }
+                jsonFormatter.WriteObject(fs, org);
             }
-        }
 
+            string sfd = path + "ZipBackup.rar";
+            ZipFile zf = new ZipFile(sfd);
+            zf.AddDirectory(directoryinfo.FullName);
+            zf.Save();
+            directoryinfo.Delete(true);
+            MessageBox.Show("Архивация прошла успешно.", "Выполнено");
+        }
     }
 }
