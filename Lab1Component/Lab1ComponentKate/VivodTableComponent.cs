@@ -17,14 +17,19 @@ namespace Lab1ComponentKate
         public VivodTableComponent()
         {
             InitializeComponent();
+            dataGridView.CellClick += (e, a) => MessageBox.Show("Значение ячейки: " + SelectedTextName, "Отлично", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
 
+        [Category("Спецификация"), Description("Текст выбранной записи")]
+        public string SelectedTextName
+        {
+            get { return dataGridView.CurrentCell.Value.ToString(); }
         }
 
         public void LoadEnumerationName(List<Test> listPost, List<string> titles, List<string> fields)
         {
             for (int i = 0; i < titles.Count; i++)
                 dataGridView.Columns.Add("Column" + i, titles[i]);
-
             ChangeColumn();
             foreach (var item in listPost)
             {
