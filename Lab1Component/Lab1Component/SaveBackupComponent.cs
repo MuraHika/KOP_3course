@@ -28,12 +28,8 @@ namespace Lab1Component
             InitializeComponent();
         }
 
-        public void SaveJSON(string path)
+        public void SaveJSON(string path, Test[] org)
         {
-
-            Test org1 = new Test(Test.NameOrg.Авиастар.ToString(), Test.TypeOrg.ОАО.ToString());
-            Test org2 = new Test(Test.NameOrg.УАЗ.ToString(), Test.TypeOrg.ООО.ToString());
-            Test[] org = new Test[] { org1, org2 };
 
             DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(Test[]));
             string pathDir = path + "directory";

@@ -26,7 +26,11 @@ namespace FormsTest
 
         private void buttonChange_Click(object sender, EventArgs e)
         {
-            saveBackupComponent.SaveJSON("O://");
+
+            Test org1 = new Test(Test.NameOrg.Авиастар.ToString(), Test.TypeOrg.ОАО.ToString());
+            Test org2 = new Test(Test.NameOrg.УАЗ.ToString(), Test.TypeOrg.ООО.ToString());
+            Test[] org = new Test[] { org1, org2 };
+            saveBackupComponent.SaveJSON("O://", org);
         }
     }
 }
