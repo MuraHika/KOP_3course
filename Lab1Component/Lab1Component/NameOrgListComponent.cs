@@ -80,6 +80,5 @@ namespace Lab1Component
                 comboBoxType.Items.Add(elem.ToString());
             }
         }
-        
     }
 }

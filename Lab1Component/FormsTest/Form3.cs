@@ -18,7 +18,7 @@ namespace FormsTest
         {
             InitializeComponent();
 
-            List<Test> tests = new List<Test>();
+            List<object> tests = new List<object>();
             tests.Add(new Test("1", "Менеджер 1", "8-909-352-20-65"));
             tests.Add(new Test("2", "Менеджер 2", "8-917-624-58-90"));
             tests.Add(new Test("3", "Менеджер 3", "8-906-354-90-47"));
@@ -30,7 +30,7 @@ namespace FormsTest
 
         private void buttonCreateD_Click(object sender, EventArgs e)
         {
-            List<Test> tests = new List<Test>();
+            List<object> tests = new List<object>();
             tests.Add(new Test("Менеджер 1", 324));
             tests.Add(new Test("Менеджер 2", 16));
             tests.Add(new Test("Менеджер 3", 120));

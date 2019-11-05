@@ -29,7 +29,7 @@ namespace Lab1ComponentDasha
             InitializeComponent();
         }
 
-        public void SavePDF(string path, List<Test> tests, List<string> fields, List<string> title, string head)
+        public void SavePDF(string path, List<object> tests, List<string> fields, List<string> title, string head)
         {
             try
             {
@@ -119,10 +119,10 @@ namespace Lab1ComponentDasha
                     //вставляем шапку
                     PdfPCell cell = new PdfPCell();
 
-                    int j = 1;
-                    while (j < title.Count)
+                    int j = 0;
+                    while (j < title.Count-1)
                     {
-                        table.AddCell(new PdfPCell(new Phrase(title[j], fontForCellBold))
+                        table.AddCell(new PdfPCell(new Phrase(title[j+1], fontForCellBold))
                         {
                             HorizontalAlignment = Element.ALIGN_CENTER
                         });

@@ -26,8 +26,12 @@ namespace Lab1ComponentKate
             get { return dataGridView.CurrentCell.Value.ToString(); }
         }
 
-        public void LoadEnumerationName(List<Test> listPost, List<string> titles, List<string> fields)
+        public void LoadEnumerationName(List<object> listPost, List<string> titles, List<string> fields)
         {
+            if (titles.Count != fields.Count)
+            {
+                MessageBox.Show("Количество колонок не соответствует количеству заголовков", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             for (int i = 0; i < titles.Count; i++)
                 dataGridView.Columns.Add("Column" + i, titles[i]);
             ChangeColumn();

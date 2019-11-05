@@ -9,6 +9,8 @@ using System.Text;
 using Ionic.Zip;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace Lab1Component
 {
@@ -28,25 +30,55 @@ namespace Lab1Component
             InitializeComponent();
         }
 
-        public void SaveJSON(string path, Test[] org)
+        public void SaveJSON(string path, object[] org)
         {
-
-            DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(Test[]));
-            string pathDir = path + "directory";
-            DirectoryInfo directoryinfo = Directory.CreateDirectory(pathDir);
-
-            string pathJSON = pathDir + "//backup.json";
-            using (FileStream fs = new FileStream(pathJSON, FileMode.OpenOrCreate))
+            try
             {
-                jsonFormatter.WriteObject(fs, org);
-            }
+                if (File.Exists(path + "ZipBackup.rar"))
+                {
+                    File.Delete(path + "ZipBackup.rar");
+                }
+                else
+                {
+                    DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(org.GetType());
+                    string pathDir = path + "directory";
+                    DirectoryInfo directoryinfo = Directory.CreateDirectory(pathDir);
 
-            string sfd = path + "ZipBackup.rar";
-            ZipFile zf = new ZipFile(sfd);
-            zf.AddDirectory(directoryinfo.FullName);
-            zf.Save();
-            directoryinfo.Delete(true);
-            MessageBox.Show("Архивация прошла успешно.", "Выполнено");
+                    string pathJSON = pathDir + "//backup.json";
+                    try
+                    {
+                        foreach (var item in org)
+                        {
+                            Type t = item.GetType();
+                            if (t.IsSerializable)
+                            {
+                                MessageBox.Show("Класс" + t + " не является сериализуемым", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+
+                        }
+
+                        using (FileStream fs = new FileStream(pathJSON, FileMode.OpenOrCreate))
+                        {
+                            jsonFormatter.WriteObject(fs, org);
+                        }
+
+                        string sfd = path + "ZipBackup.rar";
+                        ZipFile zf = new ZipFile(sfd);
+                        zf.AddDirectory(directoryinfo.FullName);
+                        zf.Save();
+                        directoryinfo.Delete(true);
+                        MessageBox.Show("Архивация прошла успешно.", "Выполнено");
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show(e.Message, "Ошибка");
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Класс не является сериализуемым", "Ошибка");
+            }
         }
     }
 }

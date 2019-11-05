@@ -21,7 +21,7 @@ namespace FormsTest
 
         private void buttonSavePDF_Click(object sender, EventArgs e)
         {
-            List<Test> tests = new List<Test>();
+            List<object> tests = new List<object>();
             tests.Add(new Test("Поставщик 1", "Тип 1 "));
             tests.Add(new Test("Поставщик 2", "Тип 2 "));
             tests.Add(new Test("Поставщик 3", "Тип 1 "));

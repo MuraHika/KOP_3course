@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Lab1Component
 {
-    [DataContract]
+    [Serializable]
     public class Test
     {
         public enum TypeOrg
@@ -25,20 +25,15 @@ namespace Lab1Component
             МАРС,
             Авиастар
         }
-
-        [DataMember]
+        
         public string _nameOrg{ get;set;}
-
-        [DataMember]
+        
         public string _typeOrg{get; set;}
-
-        public DateTime? Date { get; set; }
 
         public Test(string nameOrg, string typeOrg)
         {
             _nameOrg = nameOrg;
             _typeOrg = typeOrg;
         }
-
     }
 }

@@ -31,7 +31,7 @@ namespace Lab1ComponentKate
             InitializeComponent();
         }
 
-        public void CreateDiagram(string path, List<Test> tests, List<string> fields, List<string> title)
+        public void CreateDiagram(string path, List<object> tests, List<string> fields, List<string> title)
         {
             try
             {
