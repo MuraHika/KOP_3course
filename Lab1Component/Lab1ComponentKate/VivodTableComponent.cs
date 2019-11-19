@@ -20,12 +20,14 @@ namespace Lab1ComponentKate
             dataGridView.CellClick += (e, a) => MessageBox.Show("Значение ячейки: " + SelectedTextName, "Отлично", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        //При нажатии на ячейку таблицы, выведиться содержание ячейки
         [Category("Спецификация"), Description("Текст выбранной записи")]
         public string SelectedTextName
         {
             get { return dataGridView.CurrentCell.Value.ToString(); }
         }
 
+        //Загрузка таблицы: список объектво класса, список заголовков, список полей, которые необходимо вывести
         public void LoadEnumerationName(List<object> listPost, List<string> titles, List<string> fields)
         {
             dataGridView.Rows.Clear();
@@ -33,9 +35,12 @@ namespace Lab1ComponentKate
             {
                 MessageBox.Show("Количество колонок не соответствует количеству заголовков", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            //Заполнение заголовков
             for (int i = 0; i < titles.Count; i++)
                 dataGridView.Columns.Add("Column" + i, titles[i]);
+            //Вызов метода конфигурации таблицы
             ChangeColumn();
+            //Заполнение таблицы
             foreach (var item in listPost)
             {
                 Type t = item.GetType();
@@ -52,15 +57,18 @@ namespace Lab1ComponentKate
                         }
                     }
                 }
+                //Вызов метода добавления строки в таблицу
                 AddRow(field);
             }
         }
 
+        //Метод добавления  строки в таблицу
         public void AddRow(string[] field)
         {
             dataGridView.Rows.Add(field);
         }
 
+        //Метод конфигурации таблицы
         public void ChangeColumn()
         {
             Table table = new Table(120);

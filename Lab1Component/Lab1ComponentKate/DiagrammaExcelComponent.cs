@@ -31,12 +31,16 @@ namespace Lab1ComponentKate
             InitializeComponent();
         }
 
+        //Создание диаграммы: путь, список объектво класса, список полей, которые необходимо вывести, список заголовков
         public void CreateDiagram(string path, List<object> tests, List<string> fields, List<string> title)
         {
             try
             {
+                //Создание списка названий столбцов гистограммы
                 List<string> listManagers = new List<string>();
+                //Создание списка значений
                 List<int> listPosts = new List<int>();
+                //Добавление в списки
                 foreach (var item in tests)
                 {
                     Type t = item.GetType();
@@ -59,7 +63,7 @@ namespace Lab1ComponentKate
                 XL.Application XL1 = new XL.Application(); // Объявляем объект
                 xlWorkBook = XL1.Workbooks.Add(1);
                 xlWorkSheet = (XL.Worksheet)xlWorkBook.Sheets[1];
-                // Заполнить ячейки A2 (со 2 по 6)
+                //Заполнение диаграммы
                 for (int i = 0; i < listManagers.Count; i++)
                 {
                     string str = "A" + (i + 1);
