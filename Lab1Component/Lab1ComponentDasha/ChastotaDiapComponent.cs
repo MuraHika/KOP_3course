@@ -13,109 +13,63 @@ namespace Lab1ComponentDasha
 {
     public partial class ChastotaDiapComponent : UserControl
     {
-        List<string> dates = new List<string>();
-        public int year = 0;
-        public int month = 0;
-        public int day = 0;
-        public string date { get; set; }
-        public DateTime DateFrom { get; set; }
-        public DateTime DateTo { get; set; }
+        public int number { get; set; }
+        public int NumberFrom { get; set; }
+        public int NumberTo { get; set; }
+
         public ChastotaDiapComponent()
         {
             InitializeComponent();
         }
 
-        public void LoadEnumerationName(string dateFrom, string dateTo)
+        public void LoadEnumerationName(int numberFrom, int numberTo)
         {
-            DateFrom = DateTime.Parse(dateFrom);
-            DateTo = DateTime.Parse(dateTo);
+            NumberFrom = numberFrom;
+            NumberTo = numberTo;
         }
 
         private void buttonGo_Click(object sender, EventArgs e)
         {
-            if (textBoxYear.Text != "")
+            //Проверка на то, введено число или же иной символ
+            try
             {
-                if (CorrectDate(textBoxYear.Text.ToString()) == true)
+                number = Convert.ToInt32(textBoxYear.Text);
+                //Вызов метода проверки
+                if (CheckNumber(number) == true)
                 {
-                    date = textBoxYear.Text.ToString();
-                    if (CheckDate(date) == true)
-                    {
-                        MessageBox.Show("Дата входит в диапазон", "Отлично", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Дата не входит в диапазон", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                    textBoxYear.BackColor = Color.Green;
                 }
                 else
                 {
-                    date = DateFrom.ToString();
-                    MessageBox.Show("Неверный формат введеной даты", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    number = NumberFrom;
+                    textBoxYear.BackColor = Color.Red;
                 }
+
             }
-            else
+            catch (Exception ex)
             {
-                date = DateFrom.ToString();
-                MessageBox.Show("Не введена дата. Пожалуйста, заполните поле даты", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Введено не число", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                number = NumberFrom;
+                textBoxYear.BackColor = Color.Red;
             }
         }
 
-        public bool CheckDate(string date)
+        //Проверка на входимость числа в данный диапозон
+        public bool CheckNumber(int number)
         {
-            year = Convert.ToInt32(date.Split('/')[2]);
-            month = Convert.ToInt32(date.Split('/')[1]);
-            day = Convert.ToInt32(date.Split('/')[0]);
-            if (DateFrom.Year <= DateTo.Year && DateFrom.Month <= DateTo.Month && DateFrom.Day < DateTo.Day)
+            if (NumberFrom < NumberTo)
             {
-                if (year < DateTo.Year && year > DateFrom.Year)
+                if (number <= NumberTo && number >= NumberFrom)
                 {
                     return true;
                 }
-                else if (year == DateFrom.Year)
-                {
-                    if (month > DateFrom.Month)
-                    {
-                        return true;
-                    }
-                    else if (month == DateFrom.Month)
-                    {
-                        if (day >= DateFrom.Day)
-                        {
-                            return true;
-                        }
-                    }
-                }
-                else if (year == DateTo.Year)
-                {
-                    if (month < DateTo.Month)
-                    {
-                        return true;
-                    }
-                    else if (month == DateTo.Month)
-                    {
-                        if (day <= DateTo.Day)
-                        {
-                            return true;
-                        }
-                    }
-                }
             }
             else
             {
-                MessageBox.Show("Дата начала больше даты конца", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            return false;
-        }
-
-        public bool CorrectDate(string date)
-        {
-            Regex reg = new Regex(@"^(?:(?:31(/)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(/)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(/)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(/)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$");
-            MatchCollection matches = reg.Matches(date);
-            if (matches.Count > 0)
-            {
-                return true;
+                MessageBox.Show("Минимальное число больше или равно максимальному", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return false;
         }
     }
 }
+

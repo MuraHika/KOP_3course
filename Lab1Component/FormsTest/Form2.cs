@@ -16,7 +16,7 @@ namespace FormsTest
         public Form2()
         {
             InitializeComponent();
-            chastotaDiapComponent.LoadEnumerationName("01/01/2000", "04/11/2019");
+            chastotaDiapComponent.LoadEnumerationName(1, 50);
         }
 
         private void buttonSavePDF_Click(object sender, EventArgs e)
