@@ -28,6 +28,7 @@ namespace Lab1ComponentKate
 
         public void LoadEnumerationName(List<object> listPost, List<string> titles, List<string> fields)
         {
+            dataGridView.Rows.Clear();
             if (titles.Count != fields.Count)
             {
                 MessageBox.Show("Количество колонок не соответствует количеству заголовков", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);

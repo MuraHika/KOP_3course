@@ -29,34 +29,23 @@
         private void InitializeComponent()
         {
             this.textBoxYear = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // textBoxYear
             // 
-            this.textBoxYear.Location = new System.Drawing.Point(302, 16);
+            this.textBoxYear.Location = new System.Drawing.Point(3, 3);
             this.textBoxYear.Name = "textBoxYear";
             this.textBoxYear.Size = new System.Drawing.Size(59, 20);
             this.textBoxYear.TabIndex = 4;
             this.textBoxYear.TextChanged += new System.EventHandler(this.buttonGo_Click);
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 19);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(293, 13);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Введите число поставок, которое совершил поставщик:";
-            // 
             // ChastotaDiapComponent
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.textBoxYear);
             this.Name = "ChastotaDiapComponent";
-            this.Size = new System.Drawing.Size(368, 85);
+            this.Size = new System.Drawing.Size(70, 28);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -64,6 +53,5 @@
 
         #endregion
         private System.Windows.Forms.TextBox textBoxYear;
-        private System.Windows.Forms.Label label2;
     }
 }
