@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.572
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29519.87
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab1Component", "Lab1Component\Lab1Component.csproj", "{A6047551-35B6-41C9-87AF-3F78110EABBE}"
 EndProject
@@ -10,6 +10,14 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab1ComponentDasha", "Lab1ComponentDasha\Lab1ComponentDasha.csproj", "{95F6A0D5-DA86-493D-B935-061EE676B405}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab1ComponentKate", "Lab1ComponentKate\Lab1ComponentKate.csproj", "{1C3FDC1C-3835-4171-B57D-C11ED3443CAE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBase", "DataBase\DataBase.csproj", "{CC01A6AE-5B26-4658-818F-97CA82239C55}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBaseDAL", "DataBaseDAL\DataBaseDAL.csproj", "{C3339B2B-6960-4F7F-A075-8CB3822328E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBaseImplementDataBase", "DataBaseImplementDataBase\DataBaseImplementDataBase.csproj", "{4D3AF10E-97E4-4538-A2CA-B0D08847491D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBaseView", "DataBaseView\DataBaseView.csproj", "{88FC0869-C9AC-456D-A6C6-CDBA8AF6C4E0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +41,22 @@ Global
 		{1C3FDC1C-3835-4171-B57D-C11ED3443CAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1C3FDC1C-3835-4171-B57D-C11ED3443CAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1C3FDC1C-3835-4171-B57D-C11ED3443CAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC01A6AE-5B26-4658-818F-97CA82239C55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC01A6AE-5B26-4658-818F-97CA82239C55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC01A6AE-5B26-4658-818F-97CA82239C55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC01A6AE-5B26-4658-818F-97CA82239C55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3339B2B-6960-4F7F-A075-8CB3822328E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3339B2B-6960-4F7F-A075-8CB3822328E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3339B2B-6960-4F7F-A075-8CB3822328E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3339B2B-6960-4F7F-A075-8CB3822328E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D3AF10E-97E4-4538-A2CA-B0D08847491D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D3AF10E-97E4-4538-A2CA-B0D08847491D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D3AF10E-97E4-4538-A2CA-B0D08847491D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D3AF10E-97E4-4538-A2CA-B0D08847491D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88FC0869-C9AC-456D-A6C6-CDBA8AF6C4E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88FC0869-C9AC-456D-A6C6-CDBA8AF6C4E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88FC0869-C9AC-456D-A6C6-CDBA8AF6C4E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88FC0869-C9AC-456D-A6C6-CDBA8AF6C4E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

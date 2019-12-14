@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataBase
+namespace DataBaseView
 {
-    public class Class1
+    public class Month_Count
     {
+        public string Month { get; set; }
+        public int Count { get; set; }
     }
 }
