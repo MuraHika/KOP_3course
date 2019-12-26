@@ -27,9 +27,9 @@ namespace DataBaseImplementDataBase
             return result;
         }
 
-        public PostavViewModel GetElement(int id)
+        public PostavViewModel GetElement(string name)
         {
-            Postav element = context.Postavs.FirstOrDefault(rec => rec.Id == id);
+            Postav element = context.Postavs.FirstOrDefault(rec => rec.Name.Equals(name));
             if (element != null)
             {
                 return new PostavViewModel

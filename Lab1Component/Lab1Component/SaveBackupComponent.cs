@@ -50,7 +50,7 @@ namespace Lab1Component
                         foreach (var item in org)
                         {
                             Type t = item.GetType();
-                            if (t.IsSerializable)
+                            if (!t.IsSerializable)
                             {
                                 MessageBox.Show("Класс" + t + " не является сериализуемым", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }

@@ -30,12 +30,9 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxName = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.nameOrgListComponent = new Lab1Component.NameOrgListComponent();
-            this.dateView = new Konponens.DateView();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.facadePatternView = new DataBaseView.FacadePatternView();
             this.SuspendLayout();
             // 
             // label1
@@ -54,42 +51,9 @@
             this.textBoxName.Size = new System.Drawing.Size(167, 20);
             this.textBoxName.TabIndex = 1;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(47, 68);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(97, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Тип организации:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(1, 133);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(143, 13);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Дата последней поставки:";
-            // 
-            // nameOrgListComponent
-            // 
-            this.nameOrgListComponent.Location = new System.Drawing.Point(161, 59);
-            this.nameOrgListComponent.Name = "nameOrgListComponent";
-            this.nameOrgListComponent.SelectedIndexName = 0;
-            this.nameOrgListComponent.Size = new System.Drawing.Size(261, 31);
-            this.nameOrgListComponent.TabIndex = 4;
-            // 
-            // dateView
-            // 
-            this.dateView.Location = new System.Drawing.Point(140, 84);
-            this.dateView.Name = "dateView";
-            this.dateView.Size = new System.Drawing.Size(249, 108);
-            this.dateView.TabIndex = 5;
-            // 
             // buttonAdd
             // 
-            this.buttonAdd.Location = new System.Drawing.Point(74, 204);
+            this.buttonAdd.Location = new System.Drawing.Point(71, 243);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(135, 30);
             this.buttonAdd.TabIndex = 6;
@@ -99,7 +63,7 @@
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(254, 204);
+            this.buttonCancel.Location = new System.Drawing.Point(251, 243);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(135, 30);
             this.buttonCancel.TabIndex = 7;
@@ -107,17 +71,22 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
+            // facadePatternView
+            // 
+            this.facadePatternView.Container = null;
+            this.facadePatternView.Location = new System.Drawing.Point(50, 53);
+            this.facadePatternView.Name = "facadePatternView";
+            this.facadePatternView.Size = new System.Drawing.Size(371, 174);
+            this.facadePatternView.TabIndex = 8;
+            // 
             // FormAddElement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(493, 244);
+            this.ClientSize = new System.Drawing.Size(432, 288);
+            this.Controls.Add(this.facadePatternView);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonAdd);
-            this.Controls.Add(this.dateView);
-            this.Controls.Add(this.nameOrgListComponent);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.textBoxName);
             this.Controls.Add(this.label1);
             this.Name = "FormAddElement";
@@ -131,11 +100,8 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBoxName;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private Lab1Component.NameOrgListComponent nameOrgListComponent;
-        private Konponens.DateView dateView;
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.Button buttonCancel;
+        private FacadePatternView facadePatternView;
     }
 }

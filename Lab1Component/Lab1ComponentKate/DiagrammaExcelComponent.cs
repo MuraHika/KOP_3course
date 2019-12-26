@@ -19,11 +19,6 @@ namespace Lab1ComponentKate
         XL.Worksheet xlWorkSheet;
         object misValue = System.Reflection.Missing.Value;
 
-        public DiagrammaExcelComponent()
-        {
-            InitializeComponent();
-        }
-
         public DiagrammaExcelComponent(IContainer container)
         {
             container.Add(this);
@@ -47,7 +42,7 @@ namespace Lab1ComponentKate
                     string[] field = new string[t.GetFields().Length];
                     foreach (var _field in t.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance))
                     {
-                        if (fields.Contains(new Regex(@"<(.*?)>").Match(_field.Name).Groups[1].Value))
+                        if (fields.Contains(new Regex(@"<(.*?)>").Match(_field.Name).Groups[1].Value) || fields.Contains(_field.Name))
                         {
                             var str = _field.GetValue(item);
                             int num;

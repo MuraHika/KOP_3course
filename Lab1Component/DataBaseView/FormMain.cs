@@ -1,19 +1,10 @@
-﻿using DataBase;
+﻿using ControlLibrary;
+using DataBase;
 using DataBaseDAL;
-using Microsoft.Office.Interop.Word;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Unity;
-using Xceed.Document.NET;
-using Xceed.Words.NET;
-using Series = Xceed.Document.NET.Series;
 
 namespace DataBaseView
 {
@@ -23,6 +14,7 @@ namespace DataBaseView
         public new IUnityContainer Container { get; set; }
         private readonly IPostavService service;
         List<Month_Count> listCount;
+
 
         public FormMain(IPostavService service)
         {
@@ -38,7 +30,22 @@ namespace DataBaseView
 
                 if (list != null)
                 {
-                    controlTreeView1.SetList(list, (x) => x.TypeOrg, (y) => y.Name);
+                    treeView1.Nodes.Clear();
+                    List<string> listType = new List<string>();
+                    foreach (var elem in Enum.GetValues(typeof(TypeOrganization.TypeOrg)))
+                    {
+                        listType.Add(elem.ToString());
+                    }
+                    for (int i = 0; i < listType.Count; i++)
+                    {
+                        treeView1.Nodes.Add(listType[i].ToString());
+                        for (int j = 0; j < list.Count; j++)
+                        {
+                            if (listType[i].Equals(list[j].TypeOrg))
+                                treeView1.Nodes[i].Nodes.Add(list[j].Name);
+                        }
+
+                    }
                 }
             }
             catch (Exception ex)
@@ -139,8 +146,18 @@ namespace DataBaseView
             {
                 listCount.Add(new Month_Count { Month = month[k], Count = count[k] });
             }
-            //wordDiagramMaker.CreateDiagram(listCount, "Month", "Count", "O://WordDiagr.docx");
-           
+            WordDiagramMaker.CreateDiagram(listCount, "Month", "Count", "O://WordDiagr.docx");
+
+        }
+
+        private void button_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<PluginsView>();
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                LoadData();
+            }
+            LoadData();
         }
     }
 }

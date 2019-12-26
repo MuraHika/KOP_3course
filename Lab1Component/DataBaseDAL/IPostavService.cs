@@ -9,7 +9,7 @@ namespace DataBaseDAL
     public interface IPostavService
     {
         List<PostavViewModel> GetList();
-        PostavViewModel GetElement(int id);
+        PostavViewModel GetElement(string name);
         void AddElement(PostavBindingModel model);
         void UpdElement(PostavBindingModel model);
         void DelElement(int id);

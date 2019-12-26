@@ -1,13 +1,5 @@
-﻿using DataBase;
-using DataBaseDAL;
+﻿using DataBaseDAL;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Unity;
 
@@ -25,7 +17,7 @@ namespace DataBaseView
         {
             InitializeComponent();
             this.service = service;
-            nameOrgListComponent.LoadEnumerationName(typeof(TypeOrganization.TypeOrg));
+            facadePatternView.LoadNameOrg();
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
@@ -36,37 +28,9 @@ namespace DataBaseView
                MessageBoxIcon.Error);
                 return;
             }
-            try
-            {
-                if (id.HasValue)
-                {
-                    service.UpdElement(new PostavBindingModel
-                    {
-                        Id = id.Value,
-                        Name = textBoxName.Text,
-                        TypeOrg = nameOrgListComponent.SelectedTextName,
-                        DateLastPost = dateView.getValue()
-                    });
-                }
-                else
-                {
-                    service.AddElement(new PostavBindingModel
-                    {
-                        Name = textBoxName.Text,
-                        TypeOrg = nameOrgListComponent.SelectedTextName,
-                        DateLastPost = dateView.getValue()
-                    });
-                }
-                MessageBox.Show("Сохранение прошло успешно", "Сообщение",
-               MessageBoxButtons.OK, MessageBoxIcon.Information);
-                DialogResult = DialogResult.OK;
-                Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
-               MessageBoxIcon.Error);
-            }
+            facadePatternView.AddDate(textBoxName.Text, service);
+            DialogResult = DialogResult.OK;
+            Close();
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
