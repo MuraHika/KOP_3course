@@ -30,7 +30,7 @@ namespace Lab1Component
             get { return _selectedIndexName; }
             set
             {
-                if (value > -2 && value < comboBoxType.Items.Count)
+                if (value > -1 && value < comboBoxType.Items.Count)
                 {
                     _selectedIndexName = value;
                     comboBoxType.SelectedIndex = _selectedIndexName;

@@ -61,7 +61,6 @@
             this.buttonChange.TabIndex = 2;
             this.buttonChange.Text = "Редактировать поставщика";
             this.buttonChange.UseVisualStyleBackColor = true;
-            this.buttonChange.Click += new System.EventHandler(this.buttonChange_Click);
             // 
             // buttonDelete
             // 
@@ -71,7 +70,6 @@
             this.buttonDelete.TabIndex = 3;
             this.buttonDelete.Text = "Удалить  поставщика";
             this.buttonDelete.UseVisualStyleBackColor = true;
-            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
             // buttonUpdate
             // 

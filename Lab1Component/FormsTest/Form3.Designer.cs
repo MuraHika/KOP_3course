@@ -38,7 +38,7 @@
             // 
             this.vivodTableComponent.Location = new System.Drawing.Point(12, 12);
             this.vivodTableComponent.Name = "vivodTableComponent";
-            this.vivodTableComponent.Size = new System.Drawing.Size(388, 238);
+            this.vivodTableComponent.Size = new System.Drawing.Size(445, 238);
             this.vivodTableComponent.TabIndex = 0;
             // 
             // buttonCreateD
@@ -56,7 +56,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(414, 317);
+            this.ClientSize = new System.Drawing.Size(469, 317);
             this.Controls.Add(this.buttonCreateD);
             this.Controls.Add(this.vivodTableComponent);
             this.Name = "Form3";

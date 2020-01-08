@@ -14,9 +14,21 @@ namespace Lab1ComponentKate
 {
     public partial class VivodTableComponent : UserControl
     {
+        private event EventHandler _gridViewSelectedElementChangeName;
+
+        [Category("Спецификация"), Description("Событие выбора элемента")]
+        public event EventHandler GridViewSelectedElementChange
+        {
+            add { _gridViewSelectedElementChangeName += value; }
+            remove { _gridViewSelectedElementChangeName -= value; }
+        }
         public VivodTableComponent()
         {
             InitializeComponent();
+            dataGridView.CellClick += (sender, e) =>
+            {
+                _gridViewSelectedElementChangeName?.Invoke(sender, e);
+            };
             dataGridView.CellClick += (e, a) => MessageBox.Show("Значение ячейки: " + SelectedTextName, "Отлично", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 

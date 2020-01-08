@@ -21,7 +21,7 @@ namespace FormsTest
 
         private void controlComboBoxSelected_ComboBoxSelectedElementChange(object sender, EventArgs e)
         {
-            MessageBox.Show(nameOrgListComponent.SelectedTextName);
+            MessageBox.Show(nameOrgListComponent.SelectedTextName, "Ваш выбранный элемент");
         }
 
         private void buttonChange_Click(object sender, EventArgs e)

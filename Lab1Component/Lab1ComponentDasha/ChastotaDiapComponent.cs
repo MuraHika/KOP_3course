@@ -17,9 +17,32 @@ namespace Lab1ComponentDasha
         public int NumberFrom { get; set; }
         public int NumberTo { get; set; }
 
+        [Category("Спецификация"), Description("Значение введенного элемента")]
+        public int SelectedNumber
+        {
+            get { return number; }
+            set
+            {
+                number = value;
+            }
+        }
+
+        private event EventHandler _textBoxSelectedElementChangeName;
+
+        [Category("Спецификация"), Description("Событие ввода элемента")]
+        public event EventHandler TextBoxSelectedElementChange
+        {
+            add { _textBoxSelectedElementChangeName += value; }
+            remove { _textBoxSelectedElementChangeName -= value; }
+        }
+
         public ChastotaDiapComponent()
         {
             InitializeComponent();
+            textBoxYear.TextChanged += (sender, e) =>
+            {
+                _textBoxSelectedElementChangeName?.Invoke(sender, e);
+            };
         }
 
         public void LoadEnumerationName(int numberFrom, int numberTo)
@@ -30,26 +53,34 @@ namespace Lab1ComponentDasha
 
         private void buttonGo_Click(object sender, EventArgs e)
         {
-            //Проверка на то, введено число или же иной символ
-            try
+            if (textBoxYear.TextLength != 0)
             {
-                number = Convert.ToInt32(textBoxYear.Text);
-                //Вызов метода проверки
-                if (CheckNumber(number) == true)
+                //Проверка на то, введено число или же иной символ
+                try
                 {
-                    textBoxYear.BackColor = Color.Green;
+                    SelectedNumber = Convert.ToInt32(textBoxYear.Text);
+                    //Вызов метода проверки
+                    if (CheckNumber(SelectedNumber) == true)
+                    {
+                        textBoxYear.BackColor = Color.Green;
+                    }
+                    else
+                    {
+                        SelectedNumber = NumberFrom;
+                        textBoxYear.BackColor = Color.Red;
+                    }
+
                 }
-                else
+                catch (Exception ex)
                 {
-                    number = NumberFrom;
+                    MessageBox.Show("Введено не число", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    SelectedNumber = NumberFrom;
                     textBoxYear.BackColor = Color.Red;
                 }
-
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Введено не число", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                number = NumberFrom;
+            else {
+                MessageBox.Show("Строка пустая, пожалуйста, заполните ее!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                SelectedNumber = NumberFrom;
                 textBoxYear.BackColor = Color.Red;
             }
         }

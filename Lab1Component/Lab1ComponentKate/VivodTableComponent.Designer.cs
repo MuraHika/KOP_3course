@@ -37,7 +37,7 @@
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Location = new System.Drawing.Point(15, 16);
             this.dataGridView.Name = "dataGridView";
-            this.dataGridView.Size = new System.Drawing.Size(370, 221);
+            this.dataGridView.Size = new System.Drawing.Size(413, 221);
             this.dataGridView.TabIndex = 0;
             // 
             // VivodTableComponent
@@ -46,7 +46,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dataGridView);
             this.Name = "VivodTableComponent";
-            this.Size = new System.Drawing.Size(388, 238);
+            this.Size = new System.Drawing.Size(431, 238);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
 

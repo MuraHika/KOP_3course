@@ -25,6 +25,20 @@ namespace DataBaseView
 
         private void PluginsView_Load(object sender, EventArgs e)
         {
+            LoadData();
+            
+
+            manager = Container.Resolve<Manager>();
+            manager.LoadPlugins("plugins");
+            if (manager.Plugins.Count != 0 && manager.Plugins != null)
+            {
+                comboBoxOperation.Items.AddRange(manager.Plugins.ToArray());
+                comboBoxOperation.Text = manager.Plugins[0].ToString();
+            }
+        }
+
+        public void LoadData() {
+            treeView1.Nodes.Clear();
             List<string> listType = new List<string>();
             List<PostavViewModel> list = service.GetList();
             foreach (var elem in Enum.GetValues(typeof(TypeOrganization.TypeOrg)))
@@ -41,14 +55,6 @@ namespace DataBaseView
                         treeView1.Nodes[i].Nodes.Add(list[j].Name);
                 }
 
-            }
-
-            manager = Container.Resolve<Manager>();
-            manager.LoadPlugins("plugins");
-            if (manager.Plugins.Count != 0 && manager.Plugins != null)
-            {
-                comboBoxOperation.Items.AddRange(manager.Plugins.ToArray());
-                comboBoxOperation.Text = manager.Plugins[0].ToString();
             }
         }
 
@@ -71,6 +77,7 @@ namespace DataBaseView
                 ((IPlugin)comboBoxOperation.SelectedItem).RunPlugin(this);
                 MessageBox.Show("Отлично обновлено", "Отлично", MessageBoxButtons.OK,
                   MessageBoxIcon.Information);
+                LoadData();
             }
             catch (Exception e1)
             {

@@ -15,7 +15,6 @@ namespace DataBaseView
         private readonly IPostavService service;
         List<Month_Count> listCount;
 
-
         public FormMain(IPostavService service)
         {
             InitializeComponent();
@@ -67,16 +66,6 @@ namespace DataBaseView
             {
                 LoadData();
             }
-        }
-
-        private void buttonChange_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void buttonDelete_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void buttonUpdate_Click(object sender, EventArgs e)

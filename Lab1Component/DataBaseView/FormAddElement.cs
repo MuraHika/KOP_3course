@@ -7,11 +7,7 @@ namespace DataBaseView
 {
     public partial class FormAddElement : Form
     {
-        [Dependency]
-        public new IUnityContainer Container { get; set; }
-        public int Id { set { id = value; } }
         private readonly IPostavService service;
-        private int? id;
 
         public FormAddElement(IPostavService service)
         {

@@ -38,7 +38,7 @@ namespace FormsTest
             //3 аргумент - передается список полей класса
             //4 аргумент - передается список названий заголоков
             //5 аргумент - указывается то, чем является шапка таблицы: столбцом или строкой. Указывается либо Столбец, либо Строка
-            requestPDFComponent.SavePDF("O://Postavsiki.pdf", tests, fields, title, "Столбец");
+            requestPDFComponent.SavePDF("O://Postavsiki.pdf", tests, fields, title, "Строка");
         }
     }
 }

@@ -48,6 +48,9 @@
             // 
             this.chastotaDiapComponent.Location = new System.Drawing.Point(12, 12);
             this.chastotaDiapComponent.Name = "chastotaDiapComponent";
+            this.chastotaDiapComponent.number = 0;
+            this.chastotaDiapComponent.NumberFrom = 0;
+            this.chastotaDiapComponent.NumberTo = 0;
             this.chastotaDiapComponent.Size = new System.Drawing.Size(368, 82);
             this.chastotaDiapComponent.TabIndex = 0;
             // 
